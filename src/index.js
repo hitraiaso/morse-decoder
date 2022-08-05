@@ -38,8 +38,21 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+  let decimal = expr.match(/.{1,10}/g);//разбиваем по 10
+  let clear = [];//расшифровка
+  for (let i = 0; i <decimal.length; i++) {
+      if (decimal[i] === '**********') {
+         clear.push(' ');//замена разделителей на пробелы
+      } 
+      else {
+          decimal[i] = decimal[i].replace(/11/g, '-').replace(/10/g, '.').replace(/0/g, '');//меняем цифры на знаки
+          clear.push(MORSE_TABLE[decimal[i]]);//соотносим с азбукой
+      };  
+  } 
+  return clear.join('');//делаем строку
 }
+  // write your solution here
+
 
 module.exports = {
     decode
